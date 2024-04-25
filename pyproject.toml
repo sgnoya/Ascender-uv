@@ -65,11 +65,17 @@ warn_unused_configs = true
 warn_unused_ignores = true
 
 [tool.ruff]
-select = ["E", "F", "B", "I"]
-ignore = ["E501", "B006"]
 line-length = 88
 target-version = "py38"
-fixable = ["E", "F"]
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "I", "N", "D", "PT"]
+ignore = ["E501", "B006", "D100", "D104", "D205", "PT003", "PT011"]
+fixable = ["E", "F", "I", "D"]
+unfixable = ["F401", "F841"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
