@@ -7,11 +7,11 @@ ruff-format-check:
 	poetry run ruff format --check src tests
 
 .PHONY: ruff-lint
-ruff:
+ruff-lint:
 	poetry run ruff check src tests --fix
 
 .PHONY: ruff-lint-check
-ruff-check:
+ruff-lint-check:
 	poetry run ruff check src tests
 
 .PHONY: mdformat
