@@ -1,16 +1,16 @@
-.PHONY: black-check
-black-check:
-	poetry run black --check src tests
+.PHONY: ruff-format
+ruff-format:
+	poetry run ruff format src tests
 
-.PHONY: black
-black:
-	poetry run black src tests
+.PHONY: ruff-format-check
+ruff-format-check:
+	poetry run ruff format --check src tests
 
-.PHONY: ruff
+.PHONY: ruff-lint
 ruff:
 	poetry run ruff check src tests --fix
 
-.PHONY: ruff-check
+.PHONY: ruff-lint-check
 ruff-check:
 	poetry run ruff check src tests
 
