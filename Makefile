@@ -33,12 +33,12 @@ test:
 .PHONY: format
 format:
 	$(MAKE) black
-	$(MAKE) ruff
+	$(MAKE) ruff-lint
 	$(MAKE) mdformat
 
 .PHONY: lint
 lint:
-	$(MAKE) ruff-check
+	$(MAKE) ruff-lint-check
 	$(MAKE) mdformat-check
 	$(MAKE) mypy
 
