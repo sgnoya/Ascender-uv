@@ -34,11 +34,13 @@ test:
 format:
 	$(MAKE) black
 	$(MAKE) ruff-lint
+	$(MAKE) ruff-format
 	$(MAKE) mdformat
 
 .PHONY: lint
 lint:
 	$(MAKE) ruff-lint-check
+	$(MAKE) ruff-format-check
 	$(MAKE) mdformat-check
 	$(MAKE) mypy
 
