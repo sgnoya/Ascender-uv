@@ -13,7 +13,8 @@ ARG RUN_POETRY_INSTALL_AT_BUILD_TIME="false"
 ENV DEBIAN_FRONTEND="noninteractive" \
     LC_ALL="C.UTF-8" \
     LANG="C.UTF-8" \
-    PYTHONPATH=${APPLICATION_DIRECTORY}
+    PYTHONPATH=${APPLICATION_DIRECTORY} \
+    PROJECT_NAME=${PROJECT_NAME}
 
 # Following is needed to install python 3.7
 RUN apt update && apt install --no-install-recommends -y software-properties-common
