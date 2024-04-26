@@ -86,6 +86,7 @@ $ sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 If `sudo docker run hello-world` works, the installation was successful.
 
 ### (Optional) Install NVIDIA Container Toolkit
+
 To use GPUs with Ascender, install the NVIDIA Container Toolkit as well. This toolkit has specific prerequisites, detailed in the [official documentation](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#pre-requisites).
 
 ```bash
@@ -103,9 +104,11 @@ $ sudo systemctl restart docker
 If `sudo docker run --rm --gpus all nvidia/cuda:11.0.3-base nvidia-smi` works, the installation was successful.
 
 ## Quick Start
+
 This section outlines how to begin using Ascender. For more detailed information, please refer to [this slide (in Japanese)](https://cvpaperchallenge.github.io/Britannica/ascender/ja).
 
 ### Create a GitHub Repository from Ascender
+
 To start, you need to create your own GitHub repository from Ascender:
 
 - Visit the GitHub repository page of Ascender.
@@ -113,6 +116,7 @@ To start, you need to create your own GitHub repository from Ascender:
 - Complete the form and click the "Create repository from template" button.
 
 Your new repository should now be set up in your GitHub account.
+
 ### Start Development
 
 ```bash
@@ -132,7 +136,6 @@ $ poetry install
 ```
 
 You are now ready to start developing with Ascender.
-
 
 ### Stop Development
 
@@ -204,6 +207,7 @@ We plan to integrate Poetry 1.2.0 into Ascender as soon as it becomes available.
 By default, Ascender's CI jobs run using Python 3.8 and 3.9. If you wish to target a different Python version, modify [the matrix in `.github/workflows/lint-and-test.yaml`](https://github.com/cvpaperchallenge/Ascender/blob/master/.github/workflows/lint-and-test.yaml#L18).
 
 ### Incorrect Reflection of Dockerfile Changes in Image Builds
+
 If you find that changes to the Dockerfile are not reflected when building the image, try the following commands:
 
 ```bash
@@ -218,9 +222,11 @@ Docker does not recreate a container.
 The `sudo docker compose build --no-cache` command builds the Docker image without using the cache, addressing the first issue. The `sudo docker compose up --force-recreate -d` command recreates and starts the containers, addressing the second issue.
 
 ### Activating/Deactivating Caching in CI Jobs
+
 Caching was introduced in CI jobs (`lint-and-tests.yaml`) starting from `v0.1.2` to reduce delays caused by Docker image builds and Poetry installations. However, if you prefer not to use this feature, set the `USE_CACHE` variable in `lint-and-tests.yaml` to `false`.
 
 ### Excessive Strictness of Ruff's Code Style Constraints
+
 If you find the style checks enforced by Ruff too stringent, you can adjust the settings in `pyproject.toml` under `tool.ruff.[xxx]`.
 
 - `select`: Specify which Ruff style rules to apply.
