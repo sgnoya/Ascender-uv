@@ -38,7 +38,6 @@ format:
 
 .PHONY: lint
 lint:
-	$(MAKE) black-check
 	$(MAKE) ruff-check
 	$(MAKE) mdformat-check
 	$(MAKE) mypy
