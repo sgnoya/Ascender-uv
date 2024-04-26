@@ -1,5 +1,6 @@
 version: "3.8"
 
+name: gpu-ascender
 services:
   core:
     runtime: nvidia
