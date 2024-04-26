@@ -32,7 +32,6 @@ test:
 
 .PHONY: format
 format:
-	$(MAKE) black
 	$(MAKE) ruff-lint
 	$(MAKE) ruff-format
 	$(MAKE) mdformat
