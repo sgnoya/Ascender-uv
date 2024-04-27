@@ -164,7 +164,7 @@ $ sudo docker compose stop
 
 ## FAQ
 
-# Using Ascender Without Docker
+### Using Ascender Without Docker
 
 While we recommend using Docker as described, you may encounter issues installing Docker due to permissions or other constraints.
 
