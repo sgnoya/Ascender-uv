@@ -40,7 +40,6 @@ Please also view [resources about Ascender (in Japanese)](https://cvpaperchallen
     │
     ├── tests/                 <- Test code.
     │
-    ├── .flake8                <- Flake8 configuration.
     ├── .dockerignore
     ├── .gitignore
     ├── LICENSE
