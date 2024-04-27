@@ -4,54 +4,50 @@
 ![python versions](https://img.shields.io/badge/python-3.8%20%7C%203.9-blue)
 [![tests](https://github.com/cvpaperchallenge/Ascender/actions/workflows/lint-and-test.yaml/badge.svg)](https://github.com/cvpaperchallenge/Ascender/actions/workflows/lint-and-test.yaml)
 [![MIT License](https://img.shields.io/github/license/cvpaperchallenge/Ascender?color=green)](LICENSE)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Code style: flake8](https://img.shields.io/badge/code%20style-flake8-black)](https://github.com/PyCQA/flake8)
-[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Typing: mypy](https://img.shields.io/badge/typing-mypy-blue)](https://github.com/python/mypy)
 [![DOI](https://zenodo.org/badge/466620310.svg)](https://zenodo.org/badge/latestdoi/466620310)
 
 ## What is Ascender?
 
-Ascender (Accelerator of SCiENtific DEvelopment and Research) is a [GitHub repository template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository) for research projects using Python as a developing language. The following features are pre-implemented to accelerate your development:
+Ascender (Accelerator of SCiENtific DEvelopment and Research) is a [GitHub repository template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository) designed for research projects using Python. It incorporates several pre-implemented features to expedite development:
 
-- **Container**: Use of [Docker](https://www.docker.com/) reduces development environment dependencies and improves code portability.
-- **Virtual environment / package management**: Package management using [Poetry](https://python-poetry.org/) improves reproducibility of the same environment.
-- **Coding style**: Automatic code style formatting using [Black](https://github.com/psf/black), [Flake8](https://github.com/pycqa/flake8), and [isort](https://github.com/PyCQA/isort).
-- **Static type check**: Static type checking with [Mypy](https://github.com/python/mypy) to assist in finding bugs.
-- **pytest**: Easily add test code using [pytest](https://github.com/pytest-dev/pytest).
-- **GitHub features**: Some useful features, [workflow](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions) for style check and test for pull request, [issue template](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository), etc. are pre-implemented.
+- **Containerization**: Dependency minimization and code portability enhancement using [Docker](https://www.docker.com/).
+- **Virtual Environment / Package Management**: Development environment reproducibility ensured by [Poetry](https://python-poetry.org/).
+- **Coding Style**: Automatic code linting and formatting with [Ruff](https://docs.astral.sh/ruff/).
+- **Static Type Checking**: Early bug detection assisted by [Mypy](https://github.com/python/mypy).
+- **Testing**: Testing simplification achieved through [pytest](https://github.com/pytest-dev/pytest).
+- **GitHub Integration**: Integration features including [GitHub Actions workflows](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions), issue templates, and more.
 
-Please check [the slide format resources about Ascender (Japanese)](https://cvpaperchallenge.github.io/Britannica/ascender/ja) too.
+Please also view [resources about Ascender (in Japanese)](https://cvpaperchallenge.github.io/Britannica/ascender/ja).
 
 ## Project Organization
 
 ```
-    ├── .github/           <- Settings for GitHub.
+    ├── .github/               <- GitHub settings.
     │
-    ├── data/              <- Datasets.
+    ├── data/                  <- Datasets.
     │
-    ├── environments/       <- Provision depends on environments.
+    ├── environments/          <- Environment-specific configurations.
     │
-    ├── models/            <- Pretrained and serialized models.
+    ├── models/                <- Pretrained and serialized models.
     │
-    ├── notebooks/         <- Jupyter notebooks.
+    ├── notebooks/             <- Jupyter notebooks.
     │
-    ├── outputs/           <- Outputs.
+    ├── outputs/               <- Outputs.
     │
-    ├── src/               <- Source code. This sould be Python module.
+    ├── src/                   <- Python Source code.
     │
-    ├── tests/             <- Test codes.
+    ├── tests/                 <- Test code.
     │
-    ├── .flake8            <- Setting file for Flake8.
     ├── .dockerignore
     ├── .gitignore
     ├── LICENSE
-    ├── Makefile           <- Makefile used as task runner.
-    ├── poetry.lock        <- Lock file. DON'T edit this file manually.
-    ├── poetry.toml        <- Setting file for Poetry.
-    ├── pyproject.toml     <- Setting file for Project. (Poetry, Black, isort, Mypy)
-    └── README.md          <- The top-level README for developers.
-
+    ├── Makefile               <- Commands for task automation.
+    ├── poetry.lock            <- Auto-generated lock file (do not edit manually).
+    ├── poetry.toml            <- Poetry configuration.
+    ├── pyproject.toml         <- Main project configuration file.
+    └── README.md              <- Top-level README for developers.
 ```
 
 ## Prerequisites
@@ -60,11 +56,11 @@ Please check [the slide format resources about Ascender (Japanese)](https://cvpa
 - [Docker Compose](https://github.com/docker/compose)
 - (Optional) [NVIDIA Container Toolkit (nvidia-docker2)](https://github.com/NVIDIA/nvidia-docker)
 
-**NOTE**: Example codes in the README.md are written for `Docker Compose v2`. However, Ascender also should work under `Docker Compose v1`. If you are using `Docker Compose v1`, just replace `docker compose` in the example code by `docker-compose`.
+**NOTE**: The example codes in the README.md are written for `Docker Compose v2`. However, Ascender is also compatible with `Docker Compose v1`. If you are using `Docker Compose v1`, simply replace `docker compose` with `docker-compose` in the example commands.
 
-## Prerequisites installation
+## Prerequisites Installation
 
-Here, we show example prerequisites installation codes for Ubuntu. If prerequisites  are already installed your environment, please skip this section. If you want to install in another environment, please follow the officail documentations.
+This section provides installation instructions for Ubuntu. If you have already installed the prerequisites, you may skip this section. For installations on other operating systems, please refer to the official documentation.
 
 - Docker and Docker Compose: [Install Docker Engine](https://docs.docker.com/engine/install/)
 - NVIDIA Container Toolkit (nvidia-docker2): [Installation Guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
@@ -86,11 +82,11 @@ $ sudo apt update
 $ sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-If `sudo docker run hello-world` works, installation succeeded.
+If `sudo docker run hello-world` works, the installation was successful.
 
-### (Optional) NVIDIA Container Toolkit
+### (Optional) Install NVIDIA Container Toolkit
 
-If you want to use GPU in Ascender, please install NVIDIA Container Toolkit (nvidia-docker2) too. NVIDIA Container Toolkit also requires some prerequisites to install. So please check thier [official documentation](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#pre-requisites) first.
+To use GPUs with Ascender, install the NVIDIA Container Toolkit as well. This toolkit has specific prerequisites, detailed in the [official documentation](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#pre-requisites).
 
 ```bash
 $ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
@@ -104,75 +100,75 @@ $ sudo apt install -y nvidia-docker2
 $ sudo systemctl restart docker
 ```
 
-If `sudo docker run --rm --gpus all nvidia/cuda:11.0.3-base nvidia-smi` works, installation succeeded.
+If `sudo docker run --rm --gpus all nvidia/cuda:11.0.3-base nvidia-smi` works, the installation was successful.
 
-## Quick start
+## Quick Start
 
-Here, we explain how to start using Ascender. Please refer to [this slide (Japanese)](https://cvpaperchallenge.github.io/Britannica/ascender/ja) for detailed information.
+This section outlines how to begin using Ascender. For more detailed information, please refer to [this slide (in Japanese)](https://cvpaperchallenge.github.io/Britannica/ascender/ja).
 
-### Create GitHub repo from Ascender
+### Create a GitHub Repository from Ascender
 
-Fisrt of all, you need to create your own GitHub repo from Ascender as follows:
+To start, you need to create your own GitHub repository from Ascender:
 
-- Visit [GitHub repo page of Ascender](https://github.com/cvpaperchallenge/Ascender).
-- Press ["Use this template"](https://github.com/cvpaperchallenge/Ascender/generate) button in the upper right part of the page.
-- Fill in the items on the page, and press "Create repository from template" button.
+- Visit the GitHub repository page of Ascender.
+- Click the ["Use this template"](https://github.com/cvpaperchallenge/Ascender/generate) button at the top right of the page.
+- Complete the form and click the "Create repository from template" button.
 
-Now, a new repo should be created from Ascender in your GitHub account.
+Your new repository should now be set up in your GitHub account.
 
-### Start development
+### Start Development
 
 ```bash
-# Clone repo
+# Clone the repository
 $ git clone git@github.com:cvpaperchallenge/<YOUR_REPO_NAME>.git
 $ cd <YOUR_REPO_NAME>
 
-# Build Docker image and run container
-$ cd environments/gpu  # if you want to use only cpu, `cd environments/cpu`
+# Build the Docker image and run the container
+$ cd environments/gpu  # For CPU only, navigate to `environments/cpu`
 $ sudo docker compose up -d
 
-# Run bash inside of container (jump into contaienr)
+# Enter the container shell
 $ sudo docker compose exec core bash
 
-# Create virtual environment and install dependent packages by Poetry
+# Set up the virtual environment and install dependencies with Poetry
 $ poetry install
 ```
 
-Now, you are ready to start development with Ascender.
+You are now ready to start developing with Ascender.
 
-### Stop development
+### Stop Development
 
 ```bash
-# Stop container
-$ cd environments/gpu  # or `cd environments/cpu` 
+# Stop the container
+$ cd environments/gpu  # Or `cd environments/cpu`
 $ sudo docker compose stop
 ```
 
 ## FAQ
 
-### Use Ascender without Docker
+# Using Ascender Without Docker
 
-We recommend using Ascender with Docker as described above. However, you might not be able to install Docker in your development environment due to permission issues or etc.
+While we recommend using Docker as described, you may encounter issues installing Docker due to permissions or other constraints.
 
-In such cases, Ascender can be used without Docker. To do that, please install Poetry in your computer, and follow the steps describing in "Start development" section with ignoring the steps related to Docker.
+If you cannot use Docker, Ascender can be operated without it. Simply install Poetry on your computer and proceed as described in the "Start Development" section, omitting the Docker steps.
 
 ```bash
 # Install Poetry
 $ pip3 install poetry
 
-# Clone repo
+# Clone the repository
 $ git clone git@github.com:<YOUR_USER_NAME>/<YOUR_REPO_NAME>.git
 $ cd <YOUR_REPO_NAME>
 
-# Create virtual environment and install dependent packages by Poetry
+# Set up the virtual environment and install dependencies with Poetry
 $ poetry install
 ```
 
-NOTE: CI job (GitHub Actions workflow) of Ascender is using Dockerfile. Therefore, using Ascender without Docker might raise error at CI job. In that case, please modify the Dockerfile appropriately or delete the CI job (`.github/workflows/lint-and-test.yaml`).
+Note: The CI jobs in Ascender's GitHub Actions workflows utilize a Dockerfile. Running without Docker may cause these jobs to fail, necessitating modifications to the Dockerfile or the deletion of the CI job (`.github/workflows/lint-and-test.yaml`).
 
-### Permission error is raised when execute `poetry install`.
+### Permission Errors When Running `poetry install`
 
-Sometime `poetry install` might rise permission error like following:
+Sometimes, running `poetry install` may result in a permission error:
 
 ```bash
 $ poetry install
@@ -181,53 +177,60 @@ $ poetry install
 virtualenv: error: argument dest: the destination . is not write-able at /home/challenger/ascender
 ```
 
-In that case, please check UID (user id) and GID (group id) at your local PC by following:
+If this occurs, check your local PC's UID (user ID) and GID (group ID) with the following commands:
 
 ```bash
-$ id -u $USER  # check UID
-$ id -g $USER  # check GID
+$ id -u $USER  # Check UID
+$ id -g $USER  # Check GID
 ```
 
-In Ascender, default value of both is `1000`. If UID or GID of your local PC is not `1000`, you need to modify the value of `UID` or `GID` inside of `docker-compose.yaml` to align your local PC (please edit their values from `1000`). Or if environmental variables `HOST_UID` and `HOST_GID` is defined at host PC, Ascender uses these values.
+In Ascender, the default UID and GID are both '1000'. If your local PC's UID or GID differs from this, you'll need to adjust the 'UID' or 'GID' values in 'docker-compose.yaml' to match your local settings. Alternatively, if the 'HOST_UID' and 'HOST_GID' environment variables are set on your host PC, Ascender will use these values.
 
-### Compatibility issue between PyTorch and Poetry
+### Compatibility Issues Between PyTorch and Poetry
 
-NOTE: Now poetry 1.2 is used in Ascender. So this issue is expected to be solved.
+As of now, there is a known compatibility issue between PyTorch and Poetry, which the Poetry community is actively addressing. This issue is anticipated to be resolved in Poetry version 1.2.0. You can track progress and explore pre-releases of this version [here](https://github.com/python-poetry/poetry/releases/tag/1.2.0b3).
 
-Currently, there is a compatibility issue between PyTorch and Poetry. This issue is being worked on by the Poetry community and is expected to be resolved in 1.2.0. (You can check pre-release of 1.2.0 from [here](https://github.com/python-poetry/poetry/releases/tag/1.2.0b3).)
+We plan to integrate Poetry 1.2.0 into Ascender as soon as it becomes available. In the meantime, you may need to use workarounds detailed in [this issue](https://github.com/python-poetry/poetry/issues/4231).
 
-We plan to incorporate Poetry 1.2.0 into Ascender immediately after its release. In the meantime, please consider using the workaround described in [this issue](https://github.com/python-poetry/poetry/issues/4231).
+**Related GitHub Issues**
 
-**Some related GitHub issues**
+- [https://github.com/python-poetry/poetry/issues/2339](https://github.com/python-poetry/poetry/issues/2339)
+- [https://github.com/python-poetry/poetry/issues/2543](https://github.com/python-poetry/poetry/issues/2543)
+- [https://github.com/python-poetry/poetry/issues/2613](https://github.com/python-poetry/poetry/issues/2613)
+- [https://github.com/python-poetry/poetry/issues/3855](https://github.com/python-poetry/poetry/issues/3855)
+- [https://github.com/python-poetry/poetry/issues/4231](https://github.com/python-poetry/poetry/issues/4231)
+- [https://github.com/python-poetry/poetry/issues/4704](https://github.com/python-poetry/poetry/issues/4704)
 
-- https://github.com/python-poetry/poetry/issues/2339
-- https://github.com/python-poetry/poetry/issues/2543
-- https://github.com/python-poetry/poetry/issues/2613
-- https://github.com/python-poetry/poetry/issues/3855
-- https://github.com/python-poetry/poetry/issues/4231
-- https://github.com/python-poetry/poetry/issues/4704
+### Changing Python Versions for CI Jobs
 
-### Change the Python version to run CI jobs
+By default, Ascender's CI jobs run using Python 3.8 and 3.9. If you wish to target a different Python version, modify [the matrix in `.github/workflows/lint-and-test.yaml`](https://github.com/cvpaperchallenge/Ascender/blob/master/.github/workflows/lint-and-test.yaml#L18).
 
-By default, CI job (GitHub Actions workflow) of Ascender is run against Python 3.8 and 3.9. If you want to change the target Python version, please modify [the matrix part of `.github/workflows/lint-and-test.yaml`](https://github.com/cvpaperchallenge/Ascender/blob/master/.github/workflows/lint-and-test.yaml#L18).
+### Incorrect Reflection of Dockerfile Changes in Image Builds
 
-### When changes to the Dockerfile are not reflected correctly on the image build
+If you find that changes to the Dockerfile are not reflected when building the image, try the following commands:
 
-When you run `sudo docker compose up` after adding some modifications to the Dockerfile, you may find no changes have been made to the image built. In that case, please try following commands:
-
-```shell
+```bash
 $ sudo docker compose build --no-cache
 $ sudo docker compose up --force-recreate -d
 ```
 
-When changes to the Dockerfile are not reflected, potential reasons are:
+When changes to the Dockerfile are not reflected correctly, the potential reasons could be:
 
-1. docker uses cache to build an image
-1. docker doesn't recreate a container
+Docker uses a cache to build the image.
+Docker does not recreate a container.
+The `sudo docker compose build --no-cache` command builds the Docker image without using the cache, addressing the first issue. The `sudo docker compose up --force-recreate -d` command recreates and starts the containers, addressing the second issue.
 
-`sudo docker compose build --no-cache` command build docker image with no cache (the solution for the 1st case). And `sudo docker compose up --force-recreate -d` command recreate and start containers (the solution for the 2nd case).
+### Activating/Deactivating Caching in CI Jobs
 
-### Activate/deavtivate caching in CI job
+Caching was introduced in CI jobs (`lint-and-tests.yaml`) starting from `v0.1.2` to reduce delays caused by Docker image builds and Poetry installations. However, if you prefer not to use this feature, set the `USE_CACHE` variable in `lint-and-tests.yaml` to `false`.
 
-Caching has been introduced in CI job (`lint-and-tests.yaml`) since `v0.1.2` to minimize latency due to Docker image build and Poetry install in the CI job.
-However, this feature has not yet been fully tested, so if you do not want to use it in the CI job, please change the value of `USE_CACHE` variable in `lint-and-tests.yaml` to `false`.
+### Excessive Strictness of Ruff's Code Style Constraints
+
+If you find the style checks enforced by Ruff too stringent, you can adjust the settings in `pyproject.toml` under `tool.ruff.[xxx]`.
+
+- `select`: Specify which Ruff style rules to apply.
+- `ignore`: Set rules to be ignored during style checking.
+- `fixable`: Allow automatic correction for certain fixable rules.
+- `unfixable`: Specify rules that should not be automatically corrected.
+
+For details on each rule, please refer to [here](https://docs.astral.sh/ruff/rules/). For more information on how to configure the `pyproject.toml` file, see [here](https://docs.astral.sh/ruff/settings/).

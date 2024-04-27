@@ -1,22 +1,18 @@
-.PHONY: black-check
-black-check:
-	poetry run black --check src tests
+.PHONY: ruff-format
+ruff-format:
+	poetry run ruff format src tests
 
-.PHONY: black
-black:
-	poetry run black src tests
+.PHONY: ruff-format-check
+ruff-format-check:
+	poetry run ruff format --check src tests
 
-.PHONY: flake8
-flake8:
-	poetry run flake8 src tests
+.PHONY: ruff-lint
+ruff-lint:
+	poetry run ruff check src tests --fix
 
-.PHONY: isort-check
-isort-check:
-	poetry run isort --check-only src tests
-
-.PHONY: isort
-isort:
-	poetry run isort src tests
+.PHONY: ruff-lint-check
+ruff-lint-check:
+	poetry run ruff check src tests
 
 .PHONY: mdformat
 mdformat:
@@ -36,16 +32,15 @@ test:
 
 .PHONY: format
 format:
-	$(MAKE) black
-	$(MAKE) isort
+	$(MAKE) ruff-lint
+	$(MAKE) ruff-format
 	$(MAKE) mdformat
 
 .PHONY: lint
 lint:
-	$(MAKE) black-check
-	$(MAKE) isort-check
+	$(MAKE) ruff-lint-check
+	$(MAKE) ruff-format-check
 	$(MAKE) mdformat-check
-	$(MAKE) flake8
 	$(MAKE) mypy
 
 .PHONY: test-all
