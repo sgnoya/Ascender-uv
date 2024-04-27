@@ -18,4 +18,4 @@ services:
     volumes:
         - ../../:/home/challenger/${PROJECT_NAME_ENV}
     ports:
-        - 8000:8000
+        - 9700:8000
