@@ -57,7 +57,7 @@ Please also view [resources about Ascender (in Japanese)](https://cvpaperchallen
 - [Docker Compose](https://github.com/docker/compose)
 - (Optional) [NVIDIA Container Toolkit (nvidia-docker2)](https://github.com/NVIDIA/nvidia-docker)
 
-> [!Note]
+> \[!Note\]
 > The example codes in the README.md are written for `Docker Compose v2`. However, Ascender is also compatible with `Docker Compose v1`. If you are using `Docker Compose v1`, simply replace `docker compose` with `docker-compose` in the example commands.
 
 ## Prerequisites Installation
@@ -131,7 +131,7 @@ Depending on the services, frameworks, and libraries used during development, it
 - Copy `environments/envs.env.sample` to create `environments/envs.env`
 - Edit `environments/envs.env` to set the environment variables you want to use inside the container
 
-> [!Note]
+> \[!Note\]
 > The `envs.env` file may contain sensitive information such as API keys and passwords and should not be version-controlled by Git. In Ascender, files named `*.env` are excluded from Git tracking by default, as they are listed in the `.gitignore` file.
 
 ### Start Development
@@ -182,7 +182,7 @@ $ cd <YOUR_REPO_NAME>
 $ poetry install
 ```
 
-> [!Note]
+> \[!Note\]
 > The CI jobs in Ascender's GitHub Actions workflows utilize a Dockerfile. Running without Docker may cause these jobs to fail, necessitating modifications to the Dockerfile or the deletion of the CI job (`.github/workflows/lint-and-test.yaml`).
 
 ### Permission Errors When Running `poetry install`
@@ -207,7 +207,7 @@ In Ascender, the default UID and GID are both '1000'. If your local PC's UID or 
 
 ### Compatibility Issues Between PyTorch and Poetry
 
-> [!Note]
+> \[!Note\]
 > Now poetry 1.2 is used in Ascender. So this issue is expected to be solved.
 
 As of now, there is a known compatibility issue between PyTorch and Poetry, which the Poetry community is actively addressing. This issue is anticipated to be resolved in Poetry version 1.2.0. You can track progress and explore pre-releases of this version [here](https://github.com/python-poetry/poetry/releases/tag/1.2.0b3).
@@ -256,3 +256,21 @@ If you find the style checks enforced by Ruff too stringent, you can adjust the 
 - `unfixable`: Specify rules that should not be automatically corrected.
 
 For details on each rule, please refer to [here](https://docs.astral.sh/ruff/rules/). For more information on how to configure the `pyproject.toml` file, see [here](https://docs.astral.sh/ruff/settings/).
+
+### Building multiple containers with Ascender’s template
+
+When using Ascender's templates for multiple projects, the following additional settings are necessary:
+
+- Specify port numbers: To avoid specifying the same port numbers as the existing containers, change the host PC's port in `environments/[cpu/gpu/ci]/docker-compose.yaml` from the default value.
+
+  ```yaml
+  ports:
+      - 8000:8000 # Example: Change to 8001:8000
+  ```
+
+- Change the project name: To prevent conflicting with the existing container names, change `PROJECT_NAME_ENV` in `environments/[cpu/gpu/ci]/.env`.
+
+  ```text
+  # If you need to change the default name of the project, edit the following.
+  PROJECT_NAME_ENV=ascender # Example: Change to a new project name
+  ```
