@@ -1,25 +1,24 @@
 version: "3.8"
 
-name: gpu-${PROJECT_NAME}
+name: gpu-${PROJECT_NAME_ENV}
 services:
   core:
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
-      - PROJECT_NAME
     build:
       args:
         - BASE_IMAGE=nvidia/cuda:11.0.3-devel-ubuntu20.04
         - PYTHON_VERSION=3.8
         - UID=${HOST_UID-1000}
         - GID=${HOST_GID-1000}
-        - PROJECT_NAME=ascender
+        - PROJECT_NAME=${PROJECT_NAME_ENV}
       context: ../../
       dockerfile: environments/Dockerfile
     env_file:
-      - ../.envs.env
+      - ../envs.env
     tty: true
     volumes:
-        - ../../:/home/challenger/${PROJECT_NAME}
+        - ../../:/home/challenger/${PROJECT_NAME_ENV}
     ports:
         - 8000:8000
