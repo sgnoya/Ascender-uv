@@ -117,6 +117,22 @@ To start, you need to create your own GitHub repository from Ascender:
 
 Your new repository should now be set up in your GitHub account.
 
+### (Optional) Modify Names Used in the Template
+
+In the Ascender template, names used in the system by default, such as those for Docker containers and bind-mounted volumes, are set to "ascender." Particularly when using Ascender’s template to create and manage multiple containers, to avoid name conflicts between containers, it is necessary to change the container names for each project (refer also to the FAQ section "Building multiple containers with Ascender’s template").
+
+If you want to change the default names used in the system, please modify the value of `PROJECT_NAME_ENV` in `environments/ci/.env`, `environments/cpu/.env`, and `environments/gpu/.env`.
+
+### (Optional) Set Environment Variables for Development Within the Container
+
+Depending on the services, frameworks, and libraries used during development, it may be necessary to specify API keys, database hostnames, and passwords as environment variables. To use environment variables within the container, please follow the steps below.
+
+- Copy `environments/envs.env.sample` to create `environments/envs.env`
+- Edit `environments/envs.env` to set the environment variables you want to use inside the container
+
+> [!Note]
+> The `envs.env` file may contain sensitive information such as API keys and passwords and should not be version-controlled by Git. In Ascender, files named `*.env` are excluded from Git tracking by default, as they are listed in the `.gitignore` file.
+
 ### Start Development
 
 ```bash
