@@ -130,6 +130,12 @@ Depending on the services, frameworks, and libraries used during development, it
 
 - Copy `environments/envs.env.sample` to create `environments/envs.env`
 - Edit `environments/envs.env` to set the environment variables you want to use inside the container
+- Add the `env_file` option to `environments/[cpu,gpu]/docker-compose.yaml`, and specify the path to `environments/envs.env` that was created above (by uncommenting the section that is commented out by default)."
+
+  ```yaml
+  # env_file:       # <- uncomment here
+  #   - ../envs.env # <- uncomment here
+  ```
 
 > \[!Note\]
 > The `envs.env` file may contain sensitive information such as API keys and passwords and should not be version-controlled by Git. In Ascender, files named `*.env` are excluded from Git tracking by default, as they are listed in the `.gitignore` file.
