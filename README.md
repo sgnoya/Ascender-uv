@@ -122,7 +122,7 @@ Your new repository should now be set up in your GitHub account.
 
 In the Ascender template, names used in the system by default, such as those for Docker containers and bind-mounted volumes, are set to "ascender." Particularly when using Ascender’s template to create and manage multiple containers, to avoid name conflicts between containers, it is necessary to change the container names for each project (refer also to the FAQ section "Building multiple containers with Ascender’s template").
 
-If you want to change the default names used in the system, please modify the value of `PROJECT_NAME_ENV` in `environments/ci/.env`, `environments/cpu/.env`, and `environments/gpu/.env`.
+If you want to change the default names used in the system, please modify the value of `PROJECT_NAME_ENV` in `environments/[cpu,gpu,ci]/.env`.
 
 ### (Optional) Set Environment Variables for Development Within the Container
 
@@ -267,14 +267,14 @@ For details on each rule, please refer to [here](https://docs.astral.sh/ruff/rul
 
 When using Ascender's templates for multiple projects, the following additional settings are necessary:
 
-- Specify port numbers: To avoid specifying the same port numbers as the existing containers, change the host PC's port in `environments/[cpu/gpu/ci]/docker-compose.yaml` from the default value.
+- Specify port numbers: To avoid specifying the same port numbers as the existing containers, change the host PC's port in `environments/[cpu,gpu,ci]/docker-compose.yaml` from the default value.
 
   ```yaml
   ports:
       - 8000:8000 # Example: Change to 8001:8000
   ```
 
-- Change the project name: To prevent conflicting with the existing container names, change `PROJECT_NAME_ENV` in `environments/[cpu/gpu/ci]/.env`.
+- Change the project name: To prevent conflicting with the existing container names, change `PROJECT_NAME_ENV` in `environments/[cpu,gpu,ci]/.env`.
 
   ```text
   # If you need to change the default name of the project, edit the following.
