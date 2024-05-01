@@ -56,7 +56,8 @@ Please also view [resources about Ascender (in Japanese)](https://cvpaperchallen
 - [Docker Compose](https://github.com/docker/compose)
 - (Optional) [NVIDIA Container Toolkit (nvidia-docker2)](https://github.com/NVIDIA/nvidia-docker)
 
-**NOTE**: The example codes in the README.md are written for `Docker Compose v2`. However, Ascender is also compatible with `Docker Compose v1`. If you are using `Docker Compose v1`, simply replace `docker compose` with `docker-compose` in the example commands.
+> \[!Note\]
+> The example codes in the README.md are written for `Docker Compose v2`. However, Ascender is also compatible with `Docker Compose v1`. If you are using `Docker Compose v1`, simply replace `docker compose` with `docker-compose` in the example commands.
 
 ## Prerequisites Installation
 
@@ -116,6 +117,30 @@ To start, you need to create your own GitHub repository from Ascender:
 
 Your new repository should now be set up in your GitHub account.
 
+### (Optional) Modify Names Used in the Template
+
+In the Ascender template, names used in the system by default, such as those for Docker containers and bind-mounted volumes, are set to "ascender." Particularly when using Ascender’s template to create and manage multiple containers, to avoid name conflicts between containers, it is necessary to change the container names for each project (refer also to the FAQ section "Building multiple containers with Ascender’s template").
+
+If you want to change the default names used in the system, please modify the value of `PROJECT_NAME_ENV` in `environments/[cpu,gpu,ci]/.env`.
+
+### (Optional) Set Environment Variables for Development Within the Container
+
+Depending on the services, frameworks, and libraries used during development, it may be necessary to specify API keys, database hostnames, and passwords as environment variables. To use environment variables within the container, please follow the steps below.
+
+- Copy `environments/envs.env.sample` to create `environments/envs.env`
+
+- Edit `environments/envs.env` to set the environment variables you want to use inside the container
+
+- Add the `env_file` option to `environments/[cpu,gpu]/docker-compose.yaml`, and specify the path to `environments/envs.env` that was created above (by uncommenting the section that is commented out by default)."
+
+  ```yaml
+  # env_file:       # <- uncomment here
+  #   - ../envs.env # <- uncomment here
+  ```
+
+> \[!Note\]
+> The `envs.env` file may contain sensitive information such as API keys and passwords and should not be version-controlled by Git. In Ascender, files named `*.env` are excluded from Git tracking by default, as they are listed in the `.gitignore` file.
+
 ### Start Development
 
 ```bash
@@ -146,7 +171,7 @@ $ sudo docker compose stop
 
 ## FAQ
 
-# Using Ascender Without Docker
+### Using Ascender Without Docker
 
 While we recommend using Docker as described, you may encounter issues installing Docker due to permissions or other constraints.
 
@@ -164,7 +189,8 @@ $ cd <YOUR_REPO_NAME>
 $ poetry install
 ```
 
-Note: The CI jobs in Ascender's GitHub Actions workflows utilize a Dockerfile. Running without Docker may cause these jobs to fail, necessitating modifications to the Dockerfile or the deletion of the CI job (`.github/workflows/lint-and-test.yaml`).
+> \[!Note\]
+> The CI jobs in Ascender's GitHub Actions workflows utilize a Dockerfile. Running without Docker may cause these jobs to fail, necessitating modifications to the Dockerfile or the deletion of the CI job (`.github/workflows/lint-and-test.yaml`).
 
 ### Permission Errors When Running `poetry install`
 
@@ -187,6 +213,9 @@ $ id -g $USER  # Check GID
 In Ascender, the default UID and GID are both '1000'. If your local PC's UID or GID differs from this, you'll need to adjust the 'UID' or 'GID' values in 'docker-compose.yaml' to match your local settings. Alternatively, if the 'HOST_UID' and 'HOST_GID' environment variables are set on your host PC, Ascender will use these values.
 
 ### Compatibility Issues Between PyTorch and Poetry
+
+> \[!Note\]
+> Now poetry 1.2 is used in Ascender. So this issue is expected to be solved.
 
 As of now, there is a known compatibility issue between PyTorch and Poetry, which the Poetry community is actively addressing. This issue is anticipated to be resolved in Poetry version 1.2.0. You can track progress and explore pre-releases of this version [here](https://github.com/python-poetry/poetry/releases/tag/1.2.0b3).
 
@@ -234,3 +263,21 @@ If you find the style checks enforced by Ruff too stringent, you can adjust the 
 - `unfixable`: Specify rules that should not be automatically corrected.
 
 For details on each rule, please refer to [here](https://docs.astral.sh/ruff/rules/). For more information on how to configure the `pyproject.toml` file, see [here](https://docs.astral.sh/ruff/settings/).
+
+### Building multiple containers with Ascender’s template
+
+When using Ascender's templates for multiple projects, the following additional settings are necessary:
+
+- Specify port numbers: To avoid specifying the same port numbers as the existing containers, change the host PC's port in `environments/[cpu,gpu,ci]/docker-compose.yaml` from the default value.
+
+  ```yaml
+  ports:
+      - 8000:8000 # Example: Change to 8001:8000
+  ```
+
+- Change the project name: To prevent conflicting with the existing container names, change `PROJECT_NAME_ENV` in `environments/[cpu,gpu,ci]/.env`.
+
+  ```text
+  # If you need to change the default name of the project, edit the following.
+  PROJECT_NAME_ENV=ascender # Example: Change to a new project name
+  ```
