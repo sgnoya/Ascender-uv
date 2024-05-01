@@ -40,8 +40,8 @@ jobs:
           path: /tmp/.buildx-cache/${{ matrix.python-version }}
           key: buildx-${{ hashFiles(format('{0}/Dockerfile', env.DOCKER_FILE_DIRECTORY), format('{0}/docker-compose.yaml', env.DOCKER_COMPOSE_DIRECTORY)) }}
 
-      - name: Build docker image with cache
-        if: env.USE_CACHE == 'true'
+      - name: Build docker image with cache using buildx
+        if: steps.cache-buildx-cache.outputs.cache-hit == 'true' && env.USE_CACHE == 'true'
         run: |
           docker buildx bake \
           --builder="${{ steps.buildx.outputs.name }}" \
@@ -52,8 +52,8 @@ jobs:
           -f docker-compose.yaml
         working-directory: ${{ env.DOCKER_COMPOSE_DIRECTORY }}
 
-      - name: Build docker image
-        if: env.USE_CACHE != 'true'
+      - name: Build docker image without cache using normal build
+        if: steps.cache-buildx-cache.outputs.cache-hit != 'true' || env.USE_CACHE != 'true'
         run: docker compose build --parallel --build-arg PYTHON_VERSION=${{ matrix.python-version }} core
         working-directory: ${{ env.DOCKER_COMPOSE_DIRECTORY }}
 
