@@ -129,7 +129,9 @@ If you want to change the default names used in the system, please modify the va
 Depending on the services, frameworks, and libraries used during development, it may be necessary to specify API keys, database hostnames, and passwords as environment variables. To use environment variables within the container, please follow the steps below.
 
 - Copy `environments/envs.env.sample` to create `environments/envs.env`
+
 - Edit `environments/envs.env` to set the environment variables you want to use inside the container
+
 - Add the `env_file` option to `environments/[cpu,gpu]/docker-compose.yaml`, and specify the path to `environments/envs.env` that was created above (by uncommenting the section that is commented out by default)."
 
   ```yaml
