@@ -38,10 +38,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache/${{ matrix.python-version }}
-          key: buildx-${{ github.ref }}-${{ github.sha }}
-          restore-keys: |
-            buildx-${{ github.ref }}
-            buildx-
+          key: buildx-${{ hashFiles(format('{0}/Dockerfile', env.DOCKER_FILE_DIRECTORY), format('{0}/docker-compose.yaml', env.DOCKER_COMPOSE_DIRECTORY)) }}
 
       - name: Build docker image with cache
         if: env.USE_CACHE == 'true'
