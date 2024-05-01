@@ -32,10 +32,12 @@ jobs:
       - name: Check version info
         run: pwd && docker-compose --version && docker --version
 
+      # Provide a builder instance with docker buildx.
       - name: Set up Docker Buildx
         if: env.USE_CACHE == 'true'
         uses: docker/setup-buildx-action@v3
 
+      # Specify a cache directory for build cache, and reuse past build cache as long as there are no changes to the environment files.
       - name: Cache Docker layers
         if: env.USE_CACHE == 'true'
         id: build-cache
@@ -44,6 +46,7 @@ jobs:
           path: /tmp/.buildx-cache/${{ matrix.python-version }}
           key: buildx-${{ hashFiles(format('{0}/Dockerfile', env.DOCKER_FILE_DIRECTORY), format('{0}/docker-compose.yaml', env.DOCKER_COMPOSE_DIRECTORY), 'poetry.lock') }}
 
+      # If build cache is not found, build the Docker image to create a new cache.
       - name: Build docker image with cache using buildx
         if: steps.build-cache.outputs.cache-hit != 'true' && env.USE_CACHE == 'true'
         uses: docker/bake-action@v4
