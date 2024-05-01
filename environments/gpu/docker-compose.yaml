@@ -15,8 +15,8 @@ services:
         - PROJECT_NAME=${PROJECT_NAME_ENV}
       context: ../../
       dockerfile: environments/Dockerfile
-    env_file:
-      - ../envs.env
+    # env_file:
+    #   - ../envs.env
     tty: true
     volumes:
         - ../../:/home/challenger/${PROJECT_NAME_ENV}
