@@ -42,15 +42,14 @@ jobs:
 
       - name: Build docker image with cache using buildx
         if: steps.cache-buildx-cache.outputs.cache-hit == 'true' && env.USE_CACHE == 'true'
-        run: |
-          docker buildx bake \
-          --builder="${{ steps.buildx.outputs.name }}" \
-          --set="core.args.PYTHON_VERSION=${{ matrix.python-version }}" \
-          --set="*.cache-from=type=local,src=/tmp/.buildx-cache/${{ matrix.python-version }}" \
-          --set="*.cache-to=type=local,dest=/tmp/.buildx-cache-new/${{ matrix.python-version }}" \
-          --load
-          -f docker-compose.yaml
-        working-directory: ${{ env.DOCKER_COMPOSE_DIRECTORY }}
+        uses: docker/bake-action@v4
+        with:
+          files: docker-compose.yaml
+          workdir: ${{ env.DOCKER_COMPOSE_DIRECTORY }}
+          load: true
+          set: |
+            core.args.PYTHON_VERSION=${{ matrix.python-version }}
+            *.cache-from=type=local,src=/tmp/.buildx-cache/${{ matrix.python-version }}
 
       - name: Build docker image without cache using normal build
         if: steps.cache-buildx-cache.outputs.cache-hit != 'true' || env.USE_CACHE != 'true'
