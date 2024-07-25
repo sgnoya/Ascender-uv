@@ -38,7 +38,7 @@ RUN python3 -m pip install --upgrade pip setuptools requests wheel six urllib3 \
 
 # Add user. Without this, following process is executed as admin.
 RUN groupadd -g ${GID} ${GROUP_NAME} \
-&& useradd -ms /bin/sh -u ${UID} -g ${GID} ${USER_NAME}
+    && useradd -ms /bin/sh -u ${UID} -g ${GID} ${USER_NAME}
 
 USER ${USER_NAME}
 WORKDIR ${APPLICATION_DIRECTORY}
