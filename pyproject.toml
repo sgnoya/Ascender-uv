@@ -23,6 +23,7 @@ classifiers = [
     "Programming Language :: Python",
     "Topic :: Software Development",
 ]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.8"
