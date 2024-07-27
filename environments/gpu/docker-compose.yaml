@@ -1,5 +1,3 @@
-version: "3.8"
-
 name: gpu-${PROJECT_NAME_ENV}
 services:
   core:
