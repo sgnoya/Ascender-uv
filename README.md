@@ -17,6 +17,7 @@ Ascender (Accelerator of SCiENtific DEvelopment and Research) is a [GitHub repos
 - **Coding Style**: Automatic code linting and formatting with [Ruff](https://docs.astral.sh/ruff/).
 - **Static Type Checking**: Early bug detection assisted by [Mypy](https://github.com/python/mypy).
 - **Testing**: Testing simplification achieved through [pytest](https://github.com/pytest-dev/pytest).
+- **Task Runner**: Simple task automation with [Poe the Poet](https://github.com/nat-n/poethepoet).
 - **GitHub Integration**: Integration features including [GitHub Actions workflows](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions), issue templates, and more.
 
 Please also view [resources about Ascender (in Japanese)](https://cvpaperchallenge.github.io/Britannica/ascender/ja).
@@ -43,7 +44,6 @@ Please also view [resources about Ascender (in Japanese)](https://cvpaperchallen
     ├── .dockerignore
     ├── .gitignore
     ├── LICENSE
-    ├── Makefile               <- Commands for task automation.
     ├── poetry.lock            <- Auto-generated lock file (do not edit manually).
     ├── poetry.toml            <- Poetry configuration.
     ├── pyproject.toml         <- Main project configuration file.
