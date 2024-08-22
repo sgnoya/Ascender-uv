@@ -33,7 +33,7 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON
 # Install pip for specified Python version
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python${PYTHON_VERSION}
 
-# Install Poethepoet directly udsing pip to type "poe" comamnd without "poetry run".
+# Install Poethepoet directly using pip to type "poe" command without "poetry run".
 RUN python3 -m pip install --upgrade pip setuptools requests wheel six urllib3 \
     && python3 -m pip install poetry poethepoet
 
