@@ -21,7 +21,7 @@ RUN apt update -y && apt install --no-install-recommends -y software-properties-
     && apt-get update && apt-get install -y \
     # Install specified Python
     python${PYTHON_VERSION} python${PYTHON_VERSION}-dev python3-pip python3-dev python-is-python3 \
-    build-essential openssl libssl-dev libffi-dev ca-certificates git curl make ssh openssh-client \
+    build-essential openssl libssl-dev libffi-dev ca-certificates git curl ssh openssh-client \
     && update-ca-certificates \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -33,8 +33,9 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON
 # Install pip for specified Python version
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python${PYTHON_VERSION}
 
+# Install Poethepoet directly using pip to type "poe" command without "poetry run".
 RUN python3 -m pip install --upgrade pip setuptools requests wheel six urllib3 \
-    && python3 -m pip install poetry
+    && python3 -m pip install poetry poethepoet
 
 # Add user. Without this, following process is executed as admin.
 RUN groupadd -g ${GID} ${GROUP_NAME} \
