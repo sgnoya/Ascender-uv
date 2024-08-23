@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Check version info
-        run: pwd && docker-compose --version && docker --version
+        run: pwd && docker compose --version && docker --version
 
       # Provide a builder instance with docker buildx.
       - name: Set up Docker Buildx
