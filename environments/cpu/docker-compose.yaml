@@ -7,6 +7,8 @@ services:
         - PYTHON_VERSION=3.12
         - UID=${HOST_UID-1000}
         - GID=${HOST_GID-1000}
+        - USER_NAME=${USER-challenger}
+        - GROUP_NAME=${USER-challengers}
         - PROJECT_NAME=${PROJECT_NAME_ENV}
       context: ../../
       dockerfile: environments/Dockerfile
@@ -15,5 +17,8 @@ services:
     tty: true
     volumes:
         - ../../:/home/challenger/${PROJECT_NAME_ENV}
+        # The following setting is to avoid overwriting the host/container's .venv
+        # i.e., the host .venv do not affect the container, and vice versa
+        - /home/${USER-challenger}/${PROJECT_NAME_ENV}/.venv    
     ports:
         - 8000:8000

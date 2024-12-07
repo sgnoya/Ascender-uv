@@ -12,3 +12,6 @@ services:
     tty: true
     volumes:
         - ../../:/home/challenger/${PROJECT_NAME_ENV}
+        # The following setting is to avoid overwriting the host/container's .venv
+        # i.e., the host .venv do not affect the container, and vice versa
+        - /home/${USER-challenger}/${PROJECT_NAME_ENV}/.venv
