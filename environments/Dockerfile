@@ -16,7 +16,18 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE=copy
 
-RUN apt update -y && apt install --no-install-recommends -y software-properties-common \
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+# Alternative way to install uv
+# ADD https://astral.sh/uv/install.sh /uv-installer.sh
+# Run the installer then remove it
+# RUN sh /uv-installer.sh && rm /uv-installer.sh
+
+
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt update -y && apt install --no-install-recommends -y software-properties-common \
     && apt-get update && apt-get install -y \
     # Install specified Python
     sudo build-essential openssl libssl-dev libffi-dev ca-certificates git curl ssh openssh-client \
