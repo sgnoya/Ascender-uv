@@ -1,3 +1,11 @@
+# Ascender-uv
+
+An unofficial modification of [Ascender](https://github.com/cvpaperchallenge/Ascender) with uv instead of Poetry.
+
+## Usage
+
+Follow the original instruction and refer to the [uv docuemntation](https://docs.astral.sh/uv/)
+
 # Ascender
 
 ![stable](https://img.shields.io/badge/stable-v0.2.0-blue)
@@ -13,7 +21,7 @@
 Ascender (Accelerator of SCiENtific DEvelopment and Research) is a [GitHub repository template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository) designed for research projects using Python. It incorporates several pre-implemented features to expedite development:
 
 - **Containerization**: Dependency minimization and code portability enhancement using [Docker](https://www.docker.com/).
-- **Virtual Environment / Package Management**: Development environment reproducibility ensured by [Poetry](https://python-poetry.org/).
+- **Virtual Environment / Package Management**: Development environment reproducibility ensured by [uv](https://docs.astral.sh/uv/).
 - **Coding Style**: Automatic code linting and formatting with [Ruff](https://docs.astral.sh/ruff/).
 - **Static Type Checking**: Early bug detection assisted by [Mypy](https://github.com/python/mypy).
 - **Testing**: Testing simplification achieved through [pytest](https://github.com/pytest-dev/pytest).
@@ -44,8 +52,7 @@ Please also view [resources about Ascender (in Japanese)](https://cvpaperchallen
     ├── .dockerignore
     ├── .gitignore
     ├── LICENSE
-    ├── poetry.lock            <- Auto-generated lock file (do not edit manually).
-    ├── poetry.toml            <- Poetry configuration.
+    ├── uv.lock                <- Auto-generated lock file (do not edit manually).
     ├── pyproject.toml         <- Main project configuration file.
     └── README.md              <- Top-level README for developers.
 ```
@@ -155,12 +162,10 @@ $ sudo docker compose up -d
 # Enter the container shell
 $ sudo docker compose exec core bash
 
-# Set up the virtual environment and install dependencies with Poetry
-$ poetry install
 ```
 
 You are now ready to start developing with Ascender.
-
+The virtual environment should be in the /home/\${USER\_NAME}/\${PROJECT\_NAME\_ENV}/.venv
 ### Stop Development
 
 ```bash
