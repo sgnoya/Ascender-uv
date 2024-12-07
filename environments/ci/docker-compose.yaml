@@ -11,7 +11,8 @@ services:
       dockerfile: environments/Dockerfile
     tty: true
     volumes:
-        - ../../:/home/challenger/${PROJECT_NAME_ENV}
-        # The following setting is to avoid overwriting the host/container's .venv
-        # i.e., the host .venv do not affect the container, and vice versa
+        - ../../:/home/${USER-challenger}/${PROJECT_NAME_ENV}
+        # The following setting is to avoid overwriting the container's .venv
+        # do not update .venv in the host machine.
+        # "rm -r .venv" is recommended before running the container.
         - /home/${USER-challenger}/${PROJECT_NAME_ENV}/.venv
