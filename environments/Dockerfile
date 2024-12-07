@@ -14,7 +14,8 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     LANG="C.UTF-8" \
     UV_SYSTEM_PYTHON=0 \
     UV_COMPILE_BYTECODE=1 \
-    UV_LINK_MODE=copy
+    UV_LINK_MODE=copy \
+    TERM=xterm-256color
 
 # Install uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
@@ -30,7 +31,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt update -y && apt install --no-install-recommends -y software-properties-common \
     && apt-get update && apt-get install -y \
     # Install specified Python
-    sudo build-essential openssl libssl-dev libffi-dev ca-certificates git curl ssh openssh-client \
+    vim sudo build-essential openssl libssl-dev libffi-dev ca-certificates git curl ssh openssh-client \
     && update-ca-certificates \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -51,5 +52,7 @@ WORKDIR ${APPLICATION_DIRECTORY}
 RUN --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     uv venv -p ${PYTHON_VERSION} \
-    && uv sync --frozen || (echo "Failed to install Python packages." && exit 1)
+    # virtualenv would be inconsistent with the lockfile without --frozen, because
+    # the lock file is updated during the build process, but it will be overwritten by the hosts' lock file.
+    && uv sync --frozen --all-extras
 

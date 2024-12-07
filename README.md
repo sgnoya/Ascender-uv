@@ -6,6 +6,8 @@ An unofficial modification of [Ascender](https://github.com/cvpaperchallenge/Asc
 
 Follow the original instruction and refer to the [uv docuemntation](https://docs.astral.sh/uv/)
 
+It is better to execute "rm -rf .venv." before running the container.
+
 # Ascender
 
 ![stable](https://img.shields.io/badge/stable-v0.2.0-blue)
@@ -155,6 +157,9 @@ Depending on the services, frameworks, and libraries used during development, it
 $ git clone git@github.com:cvpaperchallenge/<YOUR_REPO_NAME>.git
 $ cd <YOUR_REPO_NAME>
 
+# Update the lock file
+$ uv lock
+
 # Build the Docker image and run the container
 $ cd environments/gpu  # For CPU only, navigate to `environments/cpu`
 $ sudo docker compose up -d
@@ -165,7 +170,8 @@ $ sudo docker compose exec core bash
 ```
 
 You are now ready to start developing with Ascender.
-The virtual environment should be in the /home/\${USER\_NAME}/\${PROJECT\_NAME\_ENV}/.venv
+The virtual environment should be in the /home/${USER_NAME}/${PROJECT_NAME_ENV}/.venv
+
 ### Stop Development
 
 ```bash

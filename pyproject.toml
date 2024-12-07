@@ -25,19 +25,11 @@ classifiers = [
 ]
 package-mode = false
 requires-python = ">=3.8"
-dependencies = [
-    "ruff>=0.4.1",
-    "mdformat-gfm>=0.3.6",
-    "mdformat-frontmatter>=2.0.8",
-    "mdformat-footnote>=0.1.1",
-    "mypy>=1.10.0",
-    "pytest-cov>=5.0.0",
-
-]
+dependencies = []
 
 
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.12"
 # following setting is same as pysen
 # https://github.com/pfnet/pysen/blob/main/setup.cfg#L12
 check_untyped_defs = true
@@ -62,11 +54,14 @@ warn_unused_configs = true
 warn_unused_ignores = true
 
 [tool.ruff]
-line-length = 88
-target-version = "py38"
+line-length = 85
+indent-width = 4
+target-version = "py312"
+exclude = [".venv"]
 
 [tool.ruff.lint]
-select = ["E", "F", "B", "I", "N", "D", "PT"]
+extend-select = ["I"]
+select = ["A", "B", "C", "D", "E", "F", "I", "N", "S", "PT", "UP"]
 ignore = [
     # To avoid conflicting with the Ruff formatter, some linter rules should be ignored.
     # See also https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
@@ -93,21 +88,30 @@ ignore = [
     "PT003", # Checks for `pytest.fixture` calls with scope="function".
     "PT011", # Checks for `pytest.raises` calls without a match parameter.
 ]
-fixable = ["E", "F", "I", "D"]
+fixable = ["E", "F", "I", "D", "C", "UP"]
 unfixable = ["F401", "F841"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
-[tool.poe.tasks]
-ruff-format = "ruff format src tests"
-ruff-format-check = "ruff format --check src tests"
-ruff-lint = "ruff check src tests --fix"
-ruff-lint-check = "ruff check src tests"
-mdformat = "mdformat *.md"
-mdformat-check = "mdformat --check *.md"
-mypy = "mypy src"
-test = "pytest tests --cov=src --cov-report term-missing --durations 5"
-format = ["ruff-lint", "ruff-format", "mdformat"]
-lint = ["ruff-lint-check", "ruff-format-check", "mdformat-check", "mypy"]
-test-all = ["lint", "test"]
+[tool.ruff.format]
+indent-style = "space"
+quote-style = "double"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
+
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+    "mypy>=1.13.0",
+    "pip>=24.3.1",
+    "pytest>=8.3.4",
+    "ruff>=0.8.2",
+    "mdformat-gfm>=0.3.6",
+    "mdformat-frontmatter>=2.0.8",
+    "mdformat-footnote>=0.1.1",
+    "pytest-cov>=5.0.0",
+]
